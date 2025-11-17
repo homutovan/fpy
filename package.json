@@ -14,6 +14,10 @@
     "preshow:dist": "npm run build",
     "show:dist": "http-server dist"
   },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": ["<rootDir>/src/js/setupTests.js"]
+  },
   "author": "coursar",
   "license": "MIT",
   "devDependencies": {
