@@ -164,37 +164,39 @@ export function sortFilm(titleTable, arrayFilms, f) {
   return arrayFilms;
 }
 
-outputTitle();
-outputFilms1(filmArray);
-let filmsFromDom = document.getElementsByClassName("row");
-let arrFromDom = Array.from(filmsFromDom);
-// filmsFromDom[0].remove();
-// arrFromDom.splice(0, 1);
-const keysArr = Object.keys(arrFromDom[1].dataset);
-let arrNew = [...keysArr];
-let n = 1;
-for (let ind = 0; ind < 4; ind++) {
-  arrNew.splice(n, 0, keysArr[ind]);
-  n = n + 2;
-}
-let flag = 1;
-let index = -1;
-setInterval(() => {
-  if (++index === arrNew.length) {
-    index = -1;
-  } else {
-    // removeFilms();
-    let arrFilmNew = sortFilm(arrNew[index], arrFromDom, flag);
-    // outputTitle();
-    // outputFilms2(arrFilmNew);
-    flag = flag * -1;
-    let parentEl = document.querySelector(".table");
-    arrFilmNew.forEach((filmRow, indexCurrent) => {
-      let indexOld = Array.prototype.indexOf.call(filmsFromDom, filmRow);
-      parentEl.insertBefore(
-        filmsFromDom[indexOld],
-        filmsFromDom[indexCurrent + 1],
-      );
-    });
+export function initApp() {
+  outputTitle();
+  outputFilms1(filmArray);
+  let filmsFromDom = document.getElementsByClassName("row");
+  let arrFromDom = Array.from(filmsFromDom);
+  // filmsFromDom[0].remove();
+  // arrFromDom.splice(0, 1);
+  const keysArr = Object.keys(arrFromDom[1].dataset);
+  let arrNew = [...keysArr];
+  let n = 1;
+  for (let ind = 0; ind < 4; ind++) {
+    arrNew.splice(n, 0, keysArr[ind]);
+    n = n + 2;
   }
-}, 4000);
+  let flag = 1;
+  let index = -1;
+  setInterval(() => {
+    if (++index === arrNew.length) {
+      index = -1;
+    } else {
+      // removeFilms();
+      let arrFilmNew = sortFilm(arrNew[index], arrFromDom, flag);
+      // outputTitle();
+      // outputFilms2(arrFilmNew);
+      flag = flag * -1;
+      let parentEl = document.querySelector(".table");
+      arrFilmNew.forEach((filmRow, indexCurrent) => {
+        let indexOld = Array.prototype.indexOf.call(filmsFromDom, filmRow);
+        parentEl.insertBefore(
+          filmsFromDom[indexOld],
+          filmsFromDom[indexCurrent + 1],
+        );
+      });
+    }
+  }, 4000);
+}
